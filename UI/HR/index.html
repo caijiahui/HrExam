@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HR-考试平台</title>
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="js/elementUI/lib/theme-chalk/index.css">
+<link rel="stylesheet" type="text/css" href="css/layout.css">
+<link rel="stylesheet/less" type="text/css" href="css/layout.less" />
+<script type="text/javascript" src="js/less.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+  <div class="boxWrap">
+    <el-container>
+      <el-header>
+        <div class="nav-left">
+          <div class="brand">
+            <img src="img/logo.png">
+          </div>
+          <div class="plat-info">HR 考试平台</div>
+        </div>
+        <div class="nav-right">
+          <ul>
+            <li class="user-info">
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                  {{admin}}<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item disabled>hi,{{admin}}</el-dropdown-item>
+                  <el-dropdown-item>个人中心</el-dropdown-item>
+                  <el-dropdown-item divided>登出</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </li>
+          </ul>
+        </div>
+      </el-header>
+      <el-container class="nextWrap">
+        <el-aside width="220px">
+          <el-menu
+                default-active="1"
+                class="el-menu-vertical-demo"
+                @open="asideHandleOpen"
+                @close="asideHandleClose">
+                <el-submenu index="1">
+                  <template slot="title">
+                    <i class="el-icon-location"></i>
+                    <span>导航一</span>
+                  </template>
+                  <el-menu-item-group>
+                    <template slot="title">分组一</template>
+                    <el-menu-item index="1-1">选项1</el-menu-item>
+                    <el-menu-item index="1-2">选项2</el-menu-item>
+                  </el-menu-item-group>
+                  <el-menu-item-group title="分组2">
+                    <el-menu-item index="1-3">选项3</el-menu-item>
+                  </el-menu-item-group>
+                  <el-submenu index="1-4">
+                    <template slot="title">选项4</template>
+                    <el-menu-item index="1-4-1">选项1</el-menu-item>
+                  </el-submenu>
+                </el-submenu>
+                <el-menu-item index="2">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">导航二</span>
+                </el-menu-item>
+                <el-menu-item index="3">
+                  <i class="el-icon-document"></i>
+                  <span slot="title">导航三</span>
+                </el-menu-item>
+                <el-menu-item index="4">
+                  <i class="el-icon-setting"></i>
+                  <span slot="title">导航四</span>
+                </el-menu-item>
+              </el-menu>
+        </el-aside>
+        <el-main>
+          <div class="contentWrap">
+            <el-breadcrumb separator="/">
+              <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+              <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+              <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+            </el-breadcrumb>
+            <div class="content-box">
+              内容区域
+            </div>
+          </div>
+          <el-footer>
+            <div id="advan-footer">
+              <div class="row-maxwidth-98pct">
+                  <ul class="footer-copyright clearfix">
+                    <li class="copr-first">© 1983-{{nowyear}} 研华科技（中国）有限公司版权所有</li>
+                    <li id="footer-info-privacy"><a href="https://beian.miit.gov.cn/#/Integrated/recordQuery">苏ICP备11055982号</a></li>
+                  </ul>
+                  <div class="clear"></div>
+                </div>
+            </div>
+          </el-footer>
+        </el-main>
+
+      </el-container>
+    </el-container>
+  </div> 
+    
+</div>
+<!-- end #container --> 
+<script type="text/javascript" src="js/Vue.js"></script>
+<script type="text/javascript" src="js/polyfill.min.js"></script>
+<script type="text/javascript" src="js/axios.js"></script>
+<script type="text/javascript" src="js/elementUI/lib/index.js"></script>
+<!-- Yoursite Scripts -->
+<script>
+  new Vue({
+    el:"#app",
+    data:{
+      nowyear:'',
+      isMobileTurn:false,
+      mobileMenuDrawer:false,
+      admin:'Admin'
+    },
+    mounted:function(){
+      var date = new Date();
+      this.nowyear=date.getFullYear();
+
+      if(this.isMobile()){
+        this.isMobileTurn=true
+      }else{
+        this.isMobileTurn=false
+      }
+      console.log(this.isMobileTurn)
+    },
+    methods:{
+      isMobile() {
+        let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+         return flag
+      },
+      showMobileMenu:function(){
+        this.mobileMenuDrawer=true;
+      },
+      asideHandleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      asideHandleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  })
+</script>
+</body>
+</html>
